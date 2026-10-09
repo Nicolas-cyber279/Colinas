@@ -4,9 +4,6 @@ const R = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 D.documentElement.classList.add('js');
 
-const L = "data:image/png;base64,[O BASE64 ORIGINAL INTEIRO, SEM NENHUMA ALTERAÇÃO]";
-$('.lg').forEach(i => i.src = L);
-
 const I = {
     db: "M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3",
     list: "M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",
