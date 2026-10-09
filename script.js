@@ -362,3 +362,56 @@ if (
         requestAnimationFrame(f);
     })();
 }
+
+const supabaseUrl = 'https://pszvozqvieexbmkrkvdw.supabase.co';
+const supabaseAnonKey = 'sb_publishable_A8fDq18xhiTiLij6rTuSuw_9FZWKKeY';
+
+async function CaptarArroba() {
+    const emailInput = document.querySelector('#email');
+    const email = emailInput.value.trim();
+
+    if (!email) {
+        alert('Digite seu e-mail para continuar.');
+        emailInput.focus();
+        return;
+    }
+
+    if (!emailInput.checkValidity()) {
+        emailInput.reportValidity();
+        return;
+    }
+
+    if (supabaseAnonKey === 'SUA_ANON_KEY_AQUI') {
+        alert('Configure a chave anon do Supabase antes de enviar.');
+        return;
+    }
+
+    const button = document.querySelector('#CaptarArroba');
+    button.disabled = true;
+
+    try {
+        const response = await fetch(`${supabaseUrl}/rest/v1/leads`, {
+            method: 'POST',
+            headers: {
+                apikey: supabaseAnonKey,
+                Authorization: `Bearer ${supabaseAnonKey}`,
+                'Content-Type': 'application/json',
+                Prefer: 'return=minimal'
+            },
+            body: JSON.stringify({ email })
+        });
+
+        if (!response.ok) {
+            const details = await response.text();
+            throw new Error(`Supabase respondeu ${response.status}: ${details}`);
+        }
+
+        emailInput.value = '';
+        alert('E-mail cadastrado com sucesso!');
+    } catch (error) {
+        console.error('Não foi possível cadastrar o e-mail:', error);
+        alert('Não foi possível cadastrar o e-mail. Confira a conexão e a configuração do Supabase.');
+    } finally {
+        button.disabled = false;
+    }
+}
